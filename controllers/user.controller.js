@@ -20,7 +20,11 @@ const getCurrentUser = async (req, res) => {
   try {
     const user = await User.find();
 
-    return res.status(200).json(user[0]?.userId);
+    const currentUser = user[0];
+    if (currentUser?.active === "true") {
+      return res.status(200).send(user[0]?.userId);
+    }
+    return res.status(404).json({ error: "Not found" });
   } catch (error) {
     console.log(
       "Error has ocurred at current  user controller ",
