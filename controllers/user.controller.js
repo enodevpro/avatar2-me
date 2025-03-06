@@ -30,7 +30,7 @@ const getCurrentUser = async (req, res) => {
 
     const currentUser = users[0];
     if (currentUser.active) {
-      return res.status(200).json({ userId: currentUser.userId });
+      return res.status(200).send(currentUser.userId);
     }
 
     return res.status(404).json({ error: "User is not active" });
